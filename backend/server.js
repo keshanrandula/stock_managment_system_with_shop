@@ -23,8 +23,12 @@ const app = express();
 
 // Create uploads directory if not exists
 const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+  }
+} catch (error) {
+  console.warn("Uploads directory creation skipped or failed:", error.message);
 }
 
 // Connect Database
