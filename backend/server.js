@@ -35,7 +35,11 @@ try {
 connectDB();
 
 // Serve static uploads
-app.use('/uploads', express.static(uploadsDir));
+if (process.env.VERCEL) {
+  app.use('/uploads', express.static('/tmp'));
+} else {
+  app.use('/uploads', express.static(uploadsDir));
+}
 
 // Body parser middleware
 app.use(express.json());

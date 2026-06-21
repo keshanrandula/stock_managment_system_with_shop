@@ -18,7 +18,8 @@ const path = require('path');
 // Multer Storage Configuration
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/');
+    const dest = process.env.VERCEL ? '/tmp' : 'uploads/';
+    cb(null, dest);
   },
   filename(req, file, cb) {
     cb(
